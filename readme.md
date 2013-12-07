@@ -13,13 +13,13 @@ $router = new \Router\Router();
 $router->add('GET','/', function(){
     echo 'index';
 });
-$router->add('/foo/*', function(){
+$router->add('/bar/*', function(){
     echo 'wildcard';
 });
-$r->add('/foo/:bar', function($route){
-    echo "<br />Hallo word $route->boek";
+$router->add('/foo/:name', function($route){
+    echo "Hallo, $route->name";
 });
-$klein->router($_GET['q'], function(){//Callback for
+$router->route($_GET['q'], function(){
     echo 'error 404';
 });
 ```

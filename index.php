@@ -18,7 +18,7 @@ $router->add('/bar/*', function(){
 $router->add('/foo/:name', function($route){
     echo "Hallo, $route->name";
 });
-$router->route($_GET['q'], function(){//Callback for
+$router->route($_GET['q'], function(){
     echo 'error 404';
 });
 
