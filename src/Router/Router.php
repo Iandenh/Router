@@ -16,7 +16,7 @@ class Router {
     {
         $this->method = $_SERVER['REQUEST_METHOD'];
     }
-    public function getLooseArg(array $array)
+    private function getLooseArg(array $array)
     {
         $callback = array_pop($array);
         $route = array_pop($array);
