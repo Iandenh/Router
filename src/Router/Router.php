@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by Ian den Hartog
- * Version 0.1
+ * Version 0.2
  * Copyright (c) 2013 Ian den Hartog
  */
 
@@ -11,6 +11,7 @@ namespace Router;
 class Router {
     protected $route = array();
     protected $method;
+    protected $wildcard = false;
 
     function __construct()
     {
@@ -43,9 +44,14 @@ class Router {
         {
             $method = array('GET','POST','PUT','DELETE');//default value
         }
+        if(!is_object($route))
+        {
+            $route = new Route($route);
+        }
+
         $this->addMethod($method,$route,$callback);
     }
-    private function addMethod($method, $route, $callback)
+    private function addMethod($method,Route $route, $callback)
     {
         if(is_callable($callback))
         {
@@ -53,6 +59,12 @@ class Router {
             $this->route[] = $row;
         }
     }
+
+    /**
+     * @param $url
+     * @param null $call
+     * @return mixed
+     */
     public function route($url,$call = null)
     {
         foreach($this->route as $route)
@@ -84,39 +96,35 @@ class Router {
     }
     private function match($pattern,$url)
     {
-        $wildcard = false;
         $parts = explode('/', trim($pattern, '/'));
         $partsUrl = explode('/', trim($url, '/'));
-        if(count($parts) == count($partsUrl))
+        $vars = null;
+        if(count($parts) <= count($partsUrl))
         {
-            $pattern = array();
+            $patterns = array();
             for($i = 0; $i <count($parts); $i++ )
             {
-                $pattern[] = array($parts[$i] => $partsUrl[$i]);
+                $patterns[] = array($parts[$i] => $partsUrl[$i]);
             }
         }
         else
         {
             return false;
         }
-        foreach($pattern as $route)
+        foreach($patterns as $route)
         {
             foreach($route as $key => $value)
             {
-                if(substr($key, 0, 1) == ':' || $key == $value || substr($key, 0, 1) == '*' || $wildcard == true)
+                if(substr($key, 0, 1) == ':'  || substr($key, 0, 1) == '*' || $this->wildcard == true || preg_match($pattern->pattern($key),$value))
                 {
                     if(substr($key, 0, 1) == ':' )
                     {
                         $key = substr($key, 1);
                         $vars[$key] = $value;
                     }
-                    elseif(substr($key, 0, 1) == '*' || $wildcard == true)
+                    elseif(substr($key, 0, 1) == '*' || $this->wildcard == true)
                     {
-                        $wildcard = true;
-                    }
-                    else
-                    {
-                        continue;
+                        $this->wildcard = true;
                     }
                 }
                 else
@@ -126,11 +134,13 @@ class Router {
 
             }
         }
-        if($wildcard == true)
+        if($this->wildcard == true)
         {
             return true;
         }
-        else
+        elseif(count($parts) == count($partsUrl))
             return $vars;
+        else
+            return false;
     }
 } 
