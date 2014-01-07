@@ -11,7 +11,7 @@ namespace Router;
 class CaseInsensitiveRoute extends Route{
     public function pattern($pattern)
     {
-        return sprintf('/^%s\/?$/', $pattern);
+        return sprintf('/^%s\/?$/', preg_quote($pattern, '/'));
     }
 
 } 

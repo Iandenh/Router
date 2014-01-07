@@ -26,6 +26,6 @@ class Route {
 
     public function pattern($pattern)
     {
-        return sprintf('/^%s$/i', $pattern);
+        return sprintf('/^%s$/i', preg_quote($pattern, '/'));
     }
 }

@@ -73,7 +73,7 @@ class Router {
             {
 
 
-                if($route['route'] == $url)
+                if(preg_match($route['route']->pattern($route['route']),$url))
                 {
                     return call_user_func($route['callback']); //simple url
                 }

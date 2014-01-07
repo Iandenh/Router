@@ -6,11 +6,15 @@
  * Time: 17:29
  */
 require_once 'src/Router/Router.php';
+require_once 'src/Router/Route.php';
 
 $router = new \Router\Router();
 
 $router->add('GET','/', function(){
     echo 'index';
+});
+$router->add('/haha', function(){
+    echo 'wildcard';
 });
 $router->add('/bar/*', function(){
     echo 'wildcard';
