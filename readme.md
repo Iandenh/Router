@@ -1,6 +1,6 @@
 # Iandenh Router
 
-**Router.php** is a simple Router for PHP
+**Router.php** is a simple Router for PHP.
 
 ## Example
 
@@ -17,6 +17,9 @@ $router->add('/bar/*', function(){
     echo 'wildcard';
 });
 $router->add('/foo/:name', function($route){
+    echo "Hallo, $route->name";
+});
+$router->add(new \Router\CaseInsensitiveRoute('/HaHa'), function($route){
     echo "Hallo, $route->name";
 });
 $router->route($_GET['q'], function(){
