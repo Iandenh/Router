@@ -110,7 +110,8 @@ class Router
                     } elseif (substr($key, 0, 1) == '[' && substr($key, -1, 1)) {
                         $key = substr($key, 1);
                         $key = substr_replace($key, "", -1);
-                        if (strpos($key, '|')) {
+                        if (strpos($key, '|'))
+                        {
                             $array = explode("|", $key);
 
                             foreach ($array as $check) {
@@ -127,6 +128,19 @@ class Router
                                 return $result;
                             }
                         }
+                        elseif((substr($key, 0,1) == '(') && (strpos($key, ')'))){
+                            preg_match_all("/\(.*?\)/", $key, $matches);
+                            $regexes = $matches[0];
+                            $urlPart = explode(')', $key);
+                            $urlPart = $urlPart[1];
+
+                            if($this->inputCheck($value,$regexes) == true)
+                            {
+                                $vars[$urlPart] = $value;
+                                return $vars;
+                            }
+
+                        }
                     } elseif (substr($key, 0, 1) == '*' || $this->wildcard == true) {
                         $this->wildcard = true;
                     }
@@ -142,5 +156,27 @@ class Router
             return $vars;
         else
             return false;
+    }
+    private function inputCheck($value, $type)
+    {
+        switch($type[0])
+        {
+            case "(i)":
+                if(preg_match('/^\d+$/',$value))
+                    return true;
+                else
+                    return false;
+                break;
+
+            case "(a)":
+                if(preg_match('/^[\w\-]+$/',$value))
+                    return true;
+                else
+                    return false;
+                break;
+            default:
+                return false;
+
+        }
     }
 } 
