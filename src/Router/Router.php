@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by Ian den Hartog
- * Version 0.2
+ * Version 0.3
  * Copyright (c) 2013 Ian den Hartog
  */
 
