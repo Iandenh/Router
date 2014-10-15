@@ -62,6 +62,10 @@ class Router
 
     function __call($name, $arguments)
     {
+        if(!is_object($arguments[0]))
+        {
+            $arguments[0] = new Route($arguments[0]);
+        }
         switch($name)
         {
             case 'get':
