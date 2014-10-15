@@ -60,6 +60,26 @@ class Router
         }
     }
 
+    function __call($name, $arguments)
+    {
+        switch($name)
+        {
+            case 'get':
+                $this->addMethod('GET', $arguments[0], $arguments[1]);
+                break;
+            case 'post':
+                $this->addMethod('POST', $arguments[0], $arguments[1]);
+                break;
+            case 'put':
+                $this->addMethod('PUT', $arguments[0], $arguments[1]);
+                break;
+            case 'delete':
+                $this->addMethod('DELETE', $arguments[0], $arguments[1]);
+                break;
+        }
+    }
+
+
     /**
      * @param $url
      * @param null $call
