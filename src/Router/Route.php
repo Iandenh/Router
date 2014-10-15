@@ -17,6 +17,10 @@ class Route {
         {
             $this->pattern = $pattern;
         }
+        else
+        {
+            throw new \UnexpectedValueException();
+        }
     }
 
     function __toString()
