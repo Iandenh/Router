@@ -10,6 +10,7 @@ namespace Router;
 
 class Router
 {
+    const VERSION = '0.3';
     protected $route = array();
     protected $method;
     protected $wildcard = false;
