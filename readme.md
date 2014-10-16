@@ -27,3 +27,5 @@ $router->route($_GET['q'], function(){
     echo 'error 404';
 });
 ```
+
+Ian den Hartog
