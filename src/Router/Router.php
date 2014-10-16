@@ -2,7 +2,7 @@
 /**
  * Created by Ian den Hartog
  * Version 0.3
- * Copyright (c) 2013 Ian den Hartog
+ * Copyright (c) 2013-2014 Ian den Hartog
  */
 
 namespace Router;
