@@ -16,8 +16,9 @@ $router->add('GET','/', function(){
 $router->add('/haha', function(){
     echo 'wildcard';
 });
-$router->add('/bar/*', function(){
-    echo 'wildcard';
+$router->add('/bar/[haha|nee|ja]', function($route){
+    echo 'test';
+    var_dump($route);
 });
 $router->add('/foo/:name', function($route){
     echo "Hallo, $route->name";

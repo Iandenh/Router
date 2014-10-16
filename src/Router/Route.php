@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by Ian den Hartog
- * Version 0.2
+ * Version 0.3
  * Copyright (c) 2013 Ian den Hartog
  */
 
@@ -16,6 +16,10 @@ class Route {
         if(is_string($pattern))
         {
             $this->pattern = $pattern;
+        }
+        else
+        {
+            throw new \UnexpectedValueException();
         }
     }
 

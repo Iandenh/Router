@@ -7,6 +7,7 @@
 ```php
 <?php
 require_once 'src/Router/Router.php';
+require_once 'src/Router/Route.php';
 
 $router = new \Router\Router();
 
@@ -26,5 +27,5 @@ $router->route($_GET['q'], function(){
     echo 'error 404';
 });
 ```
----
+
 Ian den Hartog
