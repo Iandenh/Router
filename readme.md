@@ -27,5 +27,5 @@ $router->route($_GET['q'], function(){
     echo 'error 404';
 });
 ```
-
-Ian den Hartog
+---
+Ian den Hartog 2013-2014
