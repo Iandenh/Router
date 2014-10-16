@@ -60,27 +60,21 @@ class Router
         }
     }
 
-    function __call($name, $arguments)
+    public function get($route, $callback)
     {
-        if(!is_object($arguments[0]))
-        {
-            $arguments[0] = new Route($arguments[0]);
-        }
-        switch($name)
-        {
-            case 'get':
-                $this->addMethod('GET', $arguments[0], $arguments[1]);
-                break;
-            case 'post':
-                $this->addMethod('POST', $arguments[0], $arguments[1]);
-                break;
-            case 'put':
-                $this->addMethod('PUT', $arguments[0], $arguments[1]);
-                break;
-            case 'delete':
-                $this->addMethod('DELETE', $arguments[0], $arguments[1]);
-                break;
-        }
+        $this->add('GET', $route, $callback);
+    }
+    public function post($route, $callback)
+    {
+        $this->add('POST', $route, $callback);
+    }
+    public function put($route, $callback)
+    {
+        $this->add('PUT', $route, $callback);
+    }
+    public function delete($route, $callback)
+    {
+        $this->add('DELETE', $route, $callback);
     }
 
 
